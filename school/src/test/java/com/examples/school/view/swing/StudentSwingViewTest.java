@@ -40,4 +40,11 @@ public class StudentSwingViewTest extends AssertJSwingJUnitTestCase{
 		window.label("errorMessageLabel").requireText(" ");
 	}
 	
+	@Test
+	public void testWhenIdAndNameAreNotEmptyTheAddButtonShouldBeEnabled() {
+		window.textBox("idTextBox").enterText("1");
+		window.textBox("nameTextBox").enterText("test");
+		window.button(JButtonMatcher.withText("Add")).requireEnabled();
+	}
+	
 }
