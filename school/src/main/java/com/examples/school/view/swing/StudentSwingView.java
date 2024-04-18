@@ -13,6 +13,7 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import java.awt.Color;
 
 public class StudentSwingView extends JFrame {
 
@@ -26,6 +27,7 @@ public class StudentSwingView extends JFrame {
 	private JScrollPane scrollPane;
 	private JList studentList;
 	private JButton btnDeleteSelected;
+	private JLabel errorLabel;
 
 	/**
 	 * Launch the application.
@@ -127,6 +129,14 @@ public class StudentSwingView extends JFrame {
 		gbc_btnDeleteSelected.gridx = 0;
 		gbc_btnDeleteSelected.gridy = 4;
 		contentPane.add(btnDeleteSelected, gbc_btnDeleteSelected);
+		
+		errorLabel = new JLabel(" ");
+		errorLabel.setName("errorMessageLabel");
+		errorLabel.setForeground(Color.RED);
+		GridBagConstraints gbc_errorLabel = new GridBagConstraints();
+		gbc_errorLabel.gridx = 1;
+		gbc_errorLabel.gridy = 5;
+		contentPane.add(errorLabel, gbc_errorLabel);
 		
 	}
 
