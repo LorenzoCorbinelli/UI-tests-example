@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import java.awt.Insets;
+import javax.swing.JButton;
 
 public class StudentSwingView extends JFrame {
 
@@ -18,6 +19,7 @@ public class StudentSwingView extends JFrame {
 	private JTextField textId;
 	private JLabel lblName;
 	private JTextField textName;
+	private JButton btnAdd;
 
 	/**
 	 * Launch the application.
@@ -48,9 +50,9 @@ public class StudentSwingView extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblNewLabel = new JLabel("id");
@@ -74,7 +76,7 @@ public class StudentSwingView extends JFrame {
 		lblName = new JLabel("name");
 		GridBagConstraints gbc_lblName = new GridBagConstraints();
 		gbc_lblName.anchor = GridBagConstraints.EAST;
-		gbc_lblName.insets = new Insets(0, 0, 0, 5);
+		gbc_lblName.insets = new Insets(0, 0, 5, 5);
 		gbc_lblName.gridx = 0;
 		gbc_lblName.gridy = 1;
 		contentPane.add(lblName, gbc_lblName);
@@ -82,11 +84,19 @@ public class StudentSwingView extends JFrame {
 		textName = new JTextField();
 		textName.setName("nameTextBox");
 		GridBagConstraints gbc_textName = new GridBagConstraints();
+		gbc_textName.insets = new Insets(0, 0, 5, 0);
 		gbc_textName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textName.gridx = 1;
 		gbc_textName.gridy = 1;
 		contentPane.add(textName, gbc_textName);
 		textName.setColumns(10);
+		
+		btnAdd = new JButton("Add");
+		btnAdd.setEnabled(false);
+		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
+		gbc_btnAdd.gridx = 1;
+		gbc_btnAdd.gridy = 2;
+		contentPane.add(btnAdd, gbc_btnAdd);
 	}
 
 }

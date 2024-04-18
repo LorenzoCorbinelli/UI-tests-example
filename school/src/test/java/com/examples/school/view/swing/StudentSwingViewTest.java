@@ -3,6 +3,7 @@ package com.examples.school.view.swing;
 import static org.junit.Assert.*;
 
 import org.assertj.swing.annotation.GUITest;
+import org.assertj.swing.core.matcher.JButtonMatcher;
 import org.assertj.swing.core.matcher.JLabelMatcher;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
@@ -33,6 +34,7 @@ public class StudentSwingViewTest extends AssertJSwingJUnitTestCase{
 		window.textBox("idTextBox").requireEnabled();
 		window.label(JLabelMatcher.withText("name"));
 		window.textBox("nameTextBox").requireEnabled();
+		window.button(JButtonMatcher.withText("Add")).requireDisabled();
 	}
 	
 }
