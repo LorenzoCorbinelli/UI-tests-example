@@ -31,6 +31,8 @@ public class StudentSwingViewTest extends AssertJSwingJUnitTestCase{
 	public void testControlsInitialState() {
 		window.label(JLabelMatcher.withText("id"));
 		window.textBox("idTextBox").requireEnabled();
+		window.label(JLabelMatcher.withText("name"));
+		window.textBox("nameTextBox").requireEnabled();
 	}
 	
 }

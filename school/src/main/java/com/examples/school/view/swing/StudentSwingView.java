@@ -15,7 +15,9 @@ public class StudentSwingView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField textId;
+	private JLabel lblName;
+	private JTextField textName;
 
 	/**
 	 * Launch the application.
@@ -46,27 +48,45 @@ public class StudentSwingView extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblNewLabel = new JLabel("id");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 0;
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setName("idTextBox");
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 0;
-		contentPane.add(textField, gbc_textField);
-		textField.setColumns(10);
+		textId = new JTextField();
+		textId.setName("idTextBox");
+		GridBagConstraints gbc_textId = new GridBagConstraints();
+		gbc_textId.insets = new Insets(0, 0, 5, 0);
+		gbc_textId.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textId.gridx = 1;
+		gbc_textId.gridy = 0;
+		contentPane.add(textId, gbc_textId);
+		textId.setColumns(10);
+		
+		lblName = new JLabel("name");
+		GridBagConstraints gbc_lblName = new GridBagConstraints();
+		gbc_lblName.anchor = GridBagConstraints.EAST;
+		gbc_lblName.insets = new Insets(0, 0, 0, 5);
+		gbc_lblName.gridx = 0;
+		gbc_lblName.gridy = 1;
+		contentPane.add(lblName, gbc_lblName);
+		
+		textName = new JTextField();
+		textName.setName("nameTextBox");
+		GridBagConstraints gbc_textName = new GridBagConstraints();
+		gbc_textName.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textName.gridx = 1;
+		gbc_textName.gridy = 1;
+		contentPane.add(textName, gbc_textName);
+		textName.setColumns(10);
 	}
 
 }
