@@ -1,12 +1,12 @@
 package com.examples.school.view.swing;
 
-import static org.junit.Assert.*;
 
 import org.assertj.swing.annotation.GUITest;
 import org.assertj.swing.core.matcher.JButtonMatcher;
 import org.assertj.swing.core.matcher.JLabelMatcher;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
+import org.assertj.swing.fixture.JTextComponentFixture;
 import org.assertj.swing.junit.runner.GUITestRunner;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 import org.junit.Test;
@@ -45,6 +45,23 @@ public class StudentSwingViewTest extends AssertJSwingJUnitTestCase{
 		window.textBox("idTextBox").enterText("1");
 		window.textBox("nameTextBox").enterText("test");
 		window.button(JButtonMatcher.withText("Add")).requireEnabled();
+	}
+	
+	@Test
+	public void testWhenEitherIdOrNameAreEmptyTheAddButtonShouldBeDisabled() {
+		JTextComponentFixture id = window.textBox("idTextBox");
+		JTextComponentFixture name = window.textBox("nameTextBox");
+		
+		id.enterText("1");
+		name.enterText(" ");
+		window.button(JButtonMatcher.withText("Add")).requireDisabled();
+		
+		id.setText("");
+		name.setText("");
+		
+		id.enterText(" ");
+		name.enterText("test");
+		window.button(JButtonMatcher.withText("Add")).requireDisabled();
 	}
 	
 }
