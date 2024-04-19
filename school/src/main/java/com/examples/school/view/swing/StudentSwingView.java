@@ -5,17 +5,25 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.examples.school.model.Student;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import java.awt.Insets;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.ListSelectionModel;
 
 public class StudentSwingView extends JFrame {
 
@@ -25,11 +33,16 @@ public class StudentSwingView extends JFrame {
 	private JLabel lblName;
 	private JTextField textName;
 	private JButton btnAdd;
-	private JList list;
 	private JScrollPane scrollPane;
-	private JList studentList;
+	private JList<Student> listStudents;
 	private JButton btnDeleteSelected;
 	private JLabel errorLabel;
+	
+	private DefaultListModel<Student> listStudentsModel;
+
+	DefaultListModel<Student> getListStudentsModel() {
+		return listStudentsModel;
+	}
 
 	/**
 	 * Launch the application.
@@ -129,9 +142,16 @@ public class StudentSwingView extends JFrame {
 		gbc_scrollPane.gridy = 3;
 		contentPane.add(scrollPane, gbc_scrollPane);
 		
-		studentList = new JList();
-		studentList.setName("studentList");
-		scrollPane.setViewportView(studentList);
+		listStudentsModel = new DefaultListModel<>();
+		listStudents = new JList<>(listStudentsModel);
+		listStudents.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listStudents.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				btnDeleteSelected.setEnabled(listStudents.getSelectedIndex() != -1);
+			}
+		});
+		listStudents.setName("studentList");
+		scrollPane.setViewportView(listStudents);
 		
 		btnDeleteSelected = new JButton("Delete Selected");
 		btnDeleteSelected.setEnabled(false);
