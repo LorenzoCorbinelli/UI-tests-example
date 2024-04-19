@@ -21,8 +21,7 @@ import javax.swing.JScrollPane;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
+
 import javax.swing.ListSelectionModel;
 
 public class StudentSwingView extends JFrame {
@@ -145,11 +144,8 @@ public class StudentSwingView extends JFrame {
 		listStudentsModel = new DefaultListModel<>();
 		listStudents = new JList<>(listStudentsModel);
 		listStudents.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listStudents.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				btnDeleteSelected.setEnabled(listStudents.getSelectedIndex() != -1);
-			}
-		});
+		listStudents.addListSelectionListener(
+				arg0 -> btnDeleteSelected.setEnabled(listStudents.getSelectedIndex() != -1));
 		listStudents.setName("studentList");
 		scrollPane.setViewportView(listStudents);
 		
