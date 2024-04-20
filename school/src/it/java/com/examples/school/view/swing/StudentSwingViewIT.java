@@ -76,4 +76,15 @@ public class StudentSwingViewIT extends AssertJSwingJUnitTestCase {
 		window.button(JButtonMatcher.withText("Add")).click();
 		assertThat(window.list("studentList").contents()).containsExactly(new Student("1", "test").toString());
 	}
+	
+	@Test
+	public void testAddButtonError() {
+		studentRepository.save(new Student("1", "existing"));
+		window.textBox("idTextBox").enterText("1");
+		window.textBox("nameTextBox").enterText("test");
+		window.button(JButtonMatcher.withText("Add")).click();
+		assertThat(window.list("studentList").contents()).isEmpty();
+		window.label("errorMessageLabel")
+			.requireText("Already existing student with id 1: " + new Student("1", "existing"));
+	}
 }
