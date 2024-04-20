@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.examples.school.model.Student;
+import com.examples.school.view.StudentView;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -21,10 +22,11 @@ import javax.swing.JScrollPane;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 import javax.swing.ListSelectionModel;
 
-public class StudentSwingView extends JFrame {
+public class StudentSwingView extends JFrame implements StudentView {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -165,6 +167,29 @@ public class StudentSwingView extends JFrame {
 		gbc_errorLabel.gridx = 1;
 		gbc_errorLabel.gridy = 5;
 		contentPane.add(errorLabel, gbc_errorLabel);
+		
+	}
+
+	@Override
+	public void showAllStudents(List<Student> students) {
+		students.stream().forEach(listStudentsModel::addElement);
+	}
+
+	@Override
+	public void showError(String message, Student student) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void studentAdded(Student student) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void studentRemoved(Student student) {
+		// TODO Auto-generated method stub
 		
 	}
 

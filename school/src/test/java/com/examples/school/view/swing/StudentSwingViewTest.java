@@ -1,6 +1,10 @@
 package com.examples.school.view.swing;
 
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Arrays;
+
 import org.assertj.swing.annotation.GUITest;
 import org.assertj.swing.core.matcher.JButtonMatcher;
 import org.assertj.swing.core.matcher.JLabelMatcher;
@@ -76,6 +80,17 @@ public class StudentSwingViewTest extends AssertJSwingJUnitTestCase{
 		deleteButton.requireEnabled();
 		window.list("studentList").clearSelection();
 		deleteButton.requireDisabled();
+	}
+	
+	@Test
+	public void testShowAllStudentsShouldAddAllStudentsToTheList() {
+		Student student1 = new Student("1", "student1");
+		Student student2 = new Student("2", "student2");
+		GuiActionRunner.execute(() -> 
+				studentSwingView.showAllStudents(Arrays.asList(student1, student2))
+		);
+		String[] listContents = window.list("studentList").contents();
+		assertThat(listContents).containsExactly(student1.toString(), student2.toString());
 	}
 	
 }
