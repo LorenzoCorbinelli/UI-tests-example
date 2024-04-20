@@ -24,7 +24,6 @@ public class ModelViewControllerIT extends AssertJSwingJUnitTestCase {
 	public static final MongoDBContainer mongo = new MongoDBContainer("mongo:4.4.3");
 	private MongoClient client;
 	private StudentMongoRepository studentRepository;
-	private StudentSwingView studentSwingView;
 	private SchoolController schoolController;
 	private FrameFixture window;
 
@@ -38,13 +37,12 @@ public class ModelViewControllerIT extends AssertJSwingJUnitTestCase {
 		for (Student student : studentRepository.findAll()) {
 			studentRepository.delete(student.getId());
 		}
-		GuiActionRunner.execute(() -> {
-			studentSwingView = new StudentSwingView();
+		window = new FrameFixture(robot(), GuiActionRunner.execute(() -> {
+			StudentSwingView studentSwingView = new StudentSwingView();
 			schoolController = new SchoolController(studentSwingView, studentRepository);
 			studentSwingView.setSchoolController(schoolController);
 			return studentSwingView;
-		});
-		window = new FrameFixture(robot(), studentSwingView);
+		}));
 		window.show();
 	}
 	
