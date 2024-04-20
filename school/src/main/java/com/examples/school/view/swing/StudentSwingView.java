@@ -177,8 +177,7 @@ public class StudentSwingView extends JFrame implements StudentView {
 
 	@Override
 	public void showError(String message, Student student) {
-		// TODO Auto-generated method stub
-		
+		errorLabel.setText(message + ": " + student);
 	}
 
 	@Override
