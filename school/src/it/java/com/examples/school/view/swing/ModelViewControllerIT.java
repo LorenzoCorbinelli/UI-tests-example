@@ -61,4 +61,15 @@ public class ModelViewControllerIT extends AssertJSwingJUnitTestCase {
 		assertThat(studentRepository.findById("1")).isEqualTo(new Student("1", "test"));
 	}
 	
+	@Test
+	public void testDeleteStudent() {
+		studentRepository.save(new Student("10", "test"));
+		GuiActionRunner.execute(() -> 
+			schoolController.allStudents()
+		);
+		window.list("studentList").selectItem(0);
+		window.button(JButtonMatcher.withText("Delete Selected")).click();
+		assertThat(studentRepository.findById("10")).isNull();
+	}
+	
 }
