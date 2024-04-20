@@ -3,6 +3,7 @@ package com.examples.school.view.swing;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.assertj.swing.core.matcher.JButtonMatcher;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
@@ -68,4 +69,11 @@ public class StudentSwingViewIT extends AssertJSwingJUnitTestCase {
 		assertThat(window.list("studentList").contents()).containsExactly(student1.toString(), student2.toString());
 	}
 	
+	@Test
+	public void testAddButtonSuccess() {
+		window.textBox("idTextBox").enterText("1");
+		window.textBox("nameTextBox").enterText("test");
+		window.button(JButtonMatcher.withText("Add")).click();
+		assertThat(window.list("studentList").contents()).containsExactly(new Student("1", "test").toString());
+	}
 }
