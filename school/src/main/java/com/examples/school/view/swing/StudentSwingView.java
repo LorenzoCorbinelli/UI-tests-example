@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.examples.school.controller.SchoolController;
 import com.examples.school.model.Student;
 import com.examples.school.view.StudentView;
 
@@ -25,6 +26,8 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.ListSelectionModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class StudentSwingView extends JFrame implements StudentView {
 
@@ -40,9 +43,14 @@ public class StudentSwingView extends JFrame implements StudentView {
 	private JLabel errorLabel;
 	
 	private DefaultListModel<Student> listStudentsModel;
+	private SchoolController schoolController;
 
 	DefaultListModel<Student> getListStudentsModel() {
 		return listStudentsModel;
+	}
+
+	public void setSchoolController(SchoolController schoolController) {
+		this.schoolController = schoolController;
 	}
 
 	/**
@@ -126,6 +134,8 @@ public class StudentSwingView extends JFrame implements StudentView {
 		textName.setColumns(10);
 		
 		btnAdd = new JButton("Add");
+		btnAdd.addActionListener(
+				arg0 -> schoolController.newStudent(new Student(textId.getText(), textName.getText())));
 		btnAdd.setEnabled(false);
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
 		gbc_btnAdd.gridwidth = 2;

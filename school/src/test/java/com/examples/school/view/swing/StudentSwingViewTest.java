@@ -2,6 +2,8 @@ package com.examples.school.view.swing;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 import java.util.Arrays;
 
@@ -19,6 +21,7 @@ import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.examples.school.controller.SchoolController;
 import com.examples.school.model.Student;
 
 @RunWith(GUITestRunner.class)
@@ -26,11 +29,14 @@ public class StudentSwingViewTest extends AssertJSwingJUnitTestCase{
 
 	private StudentSwingView studentSwingView;
 	private FrameFixture window;
+	private SchoolController schoolController;
 
 	@Override
 	protected void onSetUp() throws Exception {
+		schoolController = mock(SchoolController.class);
 		GuiActionRunner.execute(() -> {
 			studentSwingView = new StudentSwingView();
+			studentSwingView.setSchoolController(schoolController);
 			return studentSwingView;
 		});
 		window = new FrameFixture(robot(), studentSwingView);
@@ -130,6 +136,14 @@ public class StudentSwingViewTest extends AssertJSwingJUnitTestCase{
 		String[] listContents = window.list("studentList").contents();
 		assertThat(listContents).containsExactly(student1.toString());
 		window.label("errorMessageLabel").requireText(" ");
+	}
+	
+	@Test
+	public void testAddButtonShouldDelegateToSchoolControllerNewStudent() {
+		window.textBox("idTextBox").enterText("1");
+		window.textBox("nameTextBox").enterText("test");
+		window.button(JButtonMatcher.withText("Add")).click();
+		verify(schoolController).newStudent(new Student("1", "test"));
 	}
 	
 }
