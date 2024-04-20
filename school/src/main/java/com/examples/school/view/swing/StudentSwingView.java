@@ -26,8 +26,6 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.ListSelectionModel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class StudentSwingView extends JFrame implements StudentView {
 
