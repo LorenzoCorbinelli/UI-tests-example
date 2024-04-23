@@ -19,8 +19,11 @@ public class SchoolSwingApp implements Callable<Void>{
 	@Option(names = {"--mongo-host"}, description = "MongoDB host address")
 	private String mongoHost = "localhost";
 	
-	@Option(names = {"--db-name"}, description = "Database name")
+	@Option(names = {"--mongo-port"}, description = "MongoDB host port")
 	private int mongoPort = 27017;
+	
+	@Option(names = {"--db-name"}, description = "Database name")
+	private String databaseName = "school";
 	
 	@Option(names = {"--db-collection"}, description = "Collection name")
 	private String collectionName = "student";
@@ -34,7 +37,7 @@ public class SchoolSwingApp implements Callable<Void>{
 		EventQueue.invokeLater(() -> {
 			try {
 				StudentMongoRepository studentRepository = new StudentMongoRepository(
-						new MongoClient(new ServerAddress(mongoHost, mongoPort)), "school", "student");
+						new MongoClient(new ServerAddress(mongoHost, mongoPort)), databaseName, collectionName);
 				StudentSwingView studentView = new StudentSwingView();
 				SchoolController schoolController = new SchoolController(studentView, studentRepository);
 				studentView.setSchoolController(schoolController);
