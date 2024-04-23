@@ -92,5 +92,13 @@ public class SchoolSwingAppE2E extends AssertJSwingJUnitTestCase {
 		assertThat(window.list("studentList").contents())
 			.anySatisfy(e -> assertThat(e).contains("10", "new student"));
 	}
+	
+	@Test @GUITest
+	public void testAddButtonError() {
+		window.textBox("idTextBox").enterText(STUDENT_FIXTURE_1_ID);
+		window.textBox("nameTextBox").enterText("new student");
+		window.button(JButtonMatcher.withText("Add")).click();
+		assertThat(window.label("errorMessageLabel").text()).contains(STUDENT_FIXTURE_1_ID, STUDENT_FIXTURE_1_NAME);
+	}
 
 }
