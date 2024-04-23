@@ -27,6 +27,8 @@ public class SchoolControllerIT {
 	private StudentRepository studentRepository;
 	private SchoolController schoolController;
 	private MongoClient client;
+	private static final String SCHOOL_DB_NAME = "school";
+	private static final String STUDENT_COLLECTION_NAME = "student";
 	
 	@Before
 	public void setup() {
@@ -34,7 +36,7 @@ public class SchoolControllerIT {
 				new ServerAddress(
 						mongo.getHost(),
 						mongo.getFirstMappedPort()));
-		studentRepository = new StudentMongoRepository(client);
+		studentRepository = new StudentMongoRepository(client, SCHOOL_DB_NAME, STUDENT_COLLECTION_NAME);
 		for (Student student : studentRepository.findAll()) {
 			studentRepository.delete(student.getId());
 		}
