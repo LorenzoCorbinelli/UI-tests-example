@@ -22,6 +22,7 @@ import org.junit.runner.RunWith;
 import org.testcontainers.containers.MongoDBContainer;
 
 import com.mongodb.MongoClient;
+import com.mongodb.client.model.Filters;
 
 @RunWith(GUITestRunner.class)
 public class SchoolSwingAppE2E extends AssertJSwingJUnitTestCase {
@@ -109,6 +110,16 @@ public class SchoolSwingAppE2E extends AssertJSwingJUnitTestCase {
 		window.button(JButtonMatcher.withText("Delete Selected")).click();
 		assertThat(window.list("studentList").contents())
 			.noneMatch(e -> e.contains(STUDENT_FIXTURE_1_NAME));
+	}
+	
+	@Test @GUITest
+	public void testDeleteButtonError() {
+		window.list("studentList").selectItem(Pattern.compile(".*" + STUDENT_FIXTURE_1_NAME + ".*"));
+		mongoClient.getDatabase(DB_NAME)
+			.getCollection(COLLECTION_NAME)
+			.deleteOne(Filters.eq("id", STUDENT_FIXTURE_1_ID));
+		window.button(JButtonMatcher.withText("Delete Selected")).click();
+		assertThat(window.label("errorMessageLabel").text()).contains(STUDENT_FIXTURE_1_ID, STUDENT_FIXTURE_1_NAME);
 	}
 
 }
