@@ -1,9 +1,9 @@
 package com.examples.school.view.swing;
 
-import static org.junit.Assert.*;
 
 import javax.swing.JFrame;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.swing.launcher.ApplicationLauncher.*;
 
 import org.assertj.swing.core.GenericTypeMatcher;
@@ -68,8 +68,10 @@ public class SchoolSwingAppE2E extends AssertJSwingJUnitTestCase {
 	}
 	
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testOnStartAllDatabaseElementAreShown() {
+		assertThat(window.list("studentList").contents())
+			.anySatisfy(e -> assertThat(e).contains("1", "first student"))
+			.anySatisfy(e -> assertThat(e).contains("2", "second student"));
 	}
 
 }
