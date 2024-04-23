@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.swing.launcher.ApplicationLauncher.*;
 
+import java.util.regex.Pattern;
+
 import org.assertj.swing.annotation.GUITest;
 import org.assertj.swing.core.GenericTypeMatcher;
 import org.assertj.swing.core.matcher.JButtonMatcher;
@@ -99,6 +101,14 @@ public class SchoolSwingAppE2E extends AssertJSwingJUnitTestCase {
 		window.textBox("nameTextBox").enterText("new student");
 		window.button(JButtonMatcher.withText("Add")).click();
 		assertThat(window.label("errorMessageLabel").text()).contains(STUDENT_FIXTURE_1_ID, STUDENT_FIXTURE_1_NAME);
+	}
+	
+	@Test @GUITest
+	public void testDeleteButtonSuccess() {
+		window.list("studentList").selectItem(Pattern.compile(".*" + STUDENT_FIXTURE_1_NAME + ".*"));
+		window.button(JButtonMatcher.withText("Delete Selected")).click();
+		assertThat(window.list("studentList").contents())
+			.noneMatch(e -> e.contains(STUDENT_FIXTURE_1_NAME));
 	}
 
 }
