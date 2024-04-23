@@ -22,6 +22,14 @@ import com.mongodb.MongoClient;
 @RunWith(GUITestRunner.class)
 public class SchoolSwingAppE2E extends AssertJSwingJUnitTestCase {
 
+	private static final String STUDENT_FIXTURE_2_NAME = "second student";
+
+	private static final String STUDENT_FIXTURE_2_ID = "2";
+
+	private static final String STUDENT_FIXTURE_1_NAME = "first student";
+
+	private static final String STUDENT_FIXTURE_1_ID = "1";
+
 	@ClassRule
 	public static final MongoDBContainer mongo = new MongoDBContainer("mongo:4.4.3");
 	
@@ -37,8 +45,8 @@ public class SchoolSwingAppE2E extends AssertJSwingJUnitTestCase {
 		Integer mappedPort = mongo.getFirstMappedPort();
 		mongoClient = new MongoClient(containerIpAddress, mappedPort);
 		mongoClient.getDatabase(DB_NAME).drop();
-		addTestStudentToTheDB("1", "first student");
-		addTestStudentToTheDB("2", "second student");
+		addTestStudentToTheDB(STUDENT_FIXTURE_1_ID, STUDENT_FIXTURE_1_NAME);
+		addTestStudentToTheDB(STUDENT_FIXTURE_2_ID, STUDENT_FIXTURE_2_NAME);
 		application("com.examples.school.app.swing.SchoolSwingApp")
 			.withArgs(
 				"--mongo-host=" + containerIpAddress,
@@ -70,8 +78,8 @@ public class SchoolSwingAppE2E extends AssertJSwingJUnitTestCase {
 	@Test
 	public void testOnStartAllDatabaseElementAreShown() {
 		assertThat(window.list("studentList").contents())
-			.anySatisfy(e -> assertThat(e).contains("1", "first student"))
-			.anySatisfy(e -> assertThat(e).contains("2", "second student"));
+			.anySatisfy(e -> assertThat(e).contains(STUDENT_FIXTURE_1_ID, STUDENT_FIXTURE_1_NAME))
+			.anySatisfy(e -> assertThat(e).contains(STUDENT_FIXTURE_2_ID, STUDENT_FIXTURE_2_NAME));
 	}
 
 }
