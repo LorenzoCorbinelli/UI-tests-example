@@ -36,9 +36,9 @@ public class StudentMongoRepository implements StudentRepository{
 	@Override
 	public Student findById(String id) {
 		Document document = studentCollection.find(Filters.eq("id", id)).first();
-		if(document == null)
-			return null;
-		return fromDocumentToStudent(document);
+		if(document != null)
+			return fromDocumentToStudent(document);
+		return null;
 	}
 
 	@Override

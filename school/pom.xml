@@ -9,6 +9,8 @@
 	<artifactId>school</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
+	
+	<name>Example with Swing, Mongo and tests</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -67,6 +69,15 @@
 	</dependencies>
 
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>3.8.0.2131</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
