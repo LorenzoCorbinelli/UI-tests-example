@@ -25,6 +25,7 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.ListSelectionModel;
+import javax.swing.WindowConstants;
 
 public class StudentSwingView extends JFrame implements StudentView {
 
@@ -52,7 +53,7 @@ public class StudentSwingView extends JFrame implements StudentView {
 
 	public StudentSwingView() {
 		setTitle("Student View");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
