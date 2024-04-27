@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>com.example.school</name>
+	<name>school</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -24,13 +24,7 @@
 		<link>
 			<name>.github</name>
 			<type>2</type>
-			<locationURI>copy_PARENT/.github</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/.github</locationURI>
 		</link>
 	</linkedResources>
-	<variableList>
-		<variable>
-			<name>copy_PARENT</name>
-			<value>$%7BPARENT-3-PROJECT_LOC%7D/git/it-docker-mongo-example</value>
-		</variable>
-	</variableList>
 </projectDescription>
